@@ -1,0 +1,391 @@
+[
+    {
+        "id": "2a3b26c9.a112da",
+        "type": "http in",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "url": "/chatfuel",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 400,
+        "wires": [
+            [
+                "863e28f.1343cd8",
+                "d43592be.62cf7"
+            ]
+        ]
+    },
+    {
+        "id": "4f55b461.4107ec",
+        "type": "change",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "req.query.mensagem",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 220,
+        "wires": [
+            [
+                "8a03510e.8689d",
+                "2cfc43b.690debc"
+            ]
+        ]
+    },
+    {
+        "id": "41977445.8ddb0c",
+        "type": "function",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "func": "msg.payload = \n[{\"text\":msg.payload.output.text[0]}];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 881.5,
+        "y": 401.75,
+        "wires": [
+            [
+                "4cd81732.6fe888"
+            ]
+        ]
+    },
+    {
+        "id": "4cd81732.6fe888",
+        "type": "http response",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 936.5,
+        "y": 489.5,
+        "wires": []
+    },
+    {
+        "id": "5d669d16.00ec24",
+        "type": "debug",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 1008.5,
+        "y": 275.5,
+        "wires": []
+    },
+    {
+        "id": "8a03510e.8689d",
+        "type": "watson-conversation-v1",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "workspaceid": "",
+        "multiuser": true,
+        "context": true,
+        "empty-payload": false,
+        "default-endpoint": false,
+        "service-endpoint": "https://gateway.watsonplatform.net/conversation/api",
+        "timeout": "",
+        "optout-learning": false,
+        "x": 821.5,
+        "y": 336,
+        "wires": [
+            [
+                "41977445.8ddb0c",
+                "5d669d16.00ec24"
+            ]
+        ]
+    },
+    {
+        "id": "863e28f.1343cd8",
+        "type": "debug",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 190,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "9bd8c85c.7fb788",
+        "type": "switch",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "property": "payload.ref",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "123",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "456",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 450,
+        "y": 400,
+        "wires": [
+            [
+                "4f55b461.4107ec"
+            ],
+            [
+                "d43592be.62cf7"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2cfc43b.690debc",
+        "type": "debug",
+        "z": "3e131cc1.ac0764",
+        "name": "End of change node",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1020,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d43592be.62cf7",
+        "type": "change",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "req.query.mensagem",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "params.version",
+                "pt": "msg",
+                "to": "2018-07-10",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 600,
+        "wires": [
+            [
+                "af66db7.ef62928",
+                "8928d9e7.d453a8"
+            ]
+        ]
+    },
+    {
+        "id": "9b549819.18a378",
+        "type": "function",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "func": "// var msg; \n// msg.payload = [{\n//         \"template_type\":\"button\",\n//         \"text\":\"What do you want to do next?\",\n//         \"buttons\":[\n//           {\n//             \"type\":\"web_url\",\n//             \"url\":\"https://www.messenger.com\",\n//             \"title\":\"Visit Messenger\"\n//           }\n//         ]\n// }]\n\n//\n\n// msg.payload = [{\n//         \"template_type\":\"button\",\n//         \"text\":\"What do you want to do next?\",\n//         \"buttons\":[\n//           {\n//             \"type\":\"web_url\",\n//             \"url\":\"https://www.messenger.com\",\n//             \"title\":\"Visit Messenger\"\n//           }\n//         ]\n// }]\n// return msg;\n\n// msg.payload = [{\n//     \"text\": \"Here is a quick reply!\",\n//     \"quick_replies\":[\n//       {\n//         \"content_type\":\"text\",\n//         \"title\":\"Search\",\n//         \"payload\":\"Moema\"\n//       }\n//     ]\n//   }]\n\n\n    var response = {};\n    var payload = [];\n    var quick_replies = [];\n    var title = \"\";\n    \n    var arr = msg.payload.output.generic;\n    arr.forEach( (element,index) => {\n        if(element.response_type == \"option\"){\n            title = element.title\n            element.options.forEach( (e,i) => {\n                quick_replies.push({\n                    \"content_type\":\"text\",\n                    \"title\":e.label,\n                    \"payload\":e.value.input.text\n                })  \n            })\n        }\n    });\n    \n    payload.push({\n        \"text\": title,\n        \"quick_replies\":quick_replies\n    })\n    \nif(quick_replies.length === 0){\n    msg.payload = [{\"text\": msg.payload.output.text.join(\"\\n\") }];\n} else {\n    msg.payload = payload;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 761.5,
+        "y": 781.75,
+        "wires": [
+            [
+                "7b012c89.65bf74",
+                "4503b953.75bc48"
+            ]
+        ]
+    },
+    {
+        "id": "7b012c89.65bf74",
+        "type": "http response",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 816.5,
+        "y": 869.5,
+        "wires": []
+    },
+    {
+        "id": "aa197458.c04648",
+        "type": "debug",
+        "z": "3e131cc1.ac0764",
+        "name": "Watson",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 880,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "af66db7.ef62928",
+        "type": "watson-conversation-v1",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "workspaceid": "e87f9d66-e625-4c11-9dd1-e28bb642f583",
+        "multiuser": true,
+        "context": true,
+        "empty-payload": false,
+        "default-endpoint": false,
+        "service-endpoint": "https://gateway.watsonplatform.net/conversation/api",
+        "timeout": "",
+        "optout-learning": false,
+        "x": 700,
+        "y": 720,
+        "wires": [
+            [
+                "9b549819.18a378",
+                "aa197458.c04648"
+            ]
+        ]
+    },
+    {
+        "id": "8928d9e7.d453a8",
+        "type": "debug",
+        "z": "3e131cc1.ac0764",
+        "name": "End of change node",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 800,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "4503b953.75bc48",
+        "type": "debug",
+        "z": "3e131cc1.ac0764",
+        "name": "Return func",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 710,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "a6b0ee6f.b598c",
+        "type": "http in",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "url": "/webhook",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 500,
+        "wires": [
+            [
+                "70db21f8.ee279",
+                "bdff63f6.ff28a"
+            ]
+        ]
+    },
+    {
+        "id": "70db21f8.ee279",
+        "type": "debug",
+        "z": "3e131cc1.ac0764",
+        "name": "post ",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 210,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "6742a396.5ef53c",
+        "type": "http response",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "bdff63f6.ff28a",
+        "type": "function",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "func": "var mode = '';\nvar vtoken = '';\nvar challenge = '';\nif (msg.payload['hub.mode']) \n{\n    mode = msg.payload['hub.mode'];\n}\nif (msg.payload['hub.verify_token']) \n{\n    vtoken = msg.payload['hub.verify_token'];\n}\nif (msg.payload['hub.challenge']) \n{\n    challenge = msg.payload['hub.challenge'];\n}\nif ('subscribe' == mode &&\n  '1234' == vtoken) {\n    msg.payload = challenge;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 450,
+        "y": 680,
+        "wires": [
+            [
+                "6742a396.5ef53c"
+            ]
+        ]
+    },
+    {
+        "id": "9347b86f.08e168",
+        "type": "http in",
+        "z": "3e131cc1.ac0764",
+        "name": "",
+        "url": "/webhook",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 760,
+        "wires": [
+            [
+                "bfd05ba7.803108"
+            ]
+        ]
+    },
+    {
+        "id": "bfd05ba7.803108",
+        "type": "debug",
+        "z": "3e131cc1.ac0764",
+        "name": "WEBHOOK POST",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 320,
+        "y": 880,
+        "wires": []
+    }
+]
